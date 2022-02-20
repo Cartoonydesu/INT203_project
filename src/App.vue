@@ -3,14 +3,15 @@ import { computed, ref } from 'vue';
 //--------- PART - Word -------------
 //คำที่มีในเกมนี้
 const words = [
-  {word: 'home', hints:'A place where you live'},
-  {word: 'java', hints: 'A name of programming language'},
-  {word: 'iphone', hints: "A popular phone's brand"},
-  {word: 'earth', hints: 'the star that we are living'},
+  {word: 'house', hint:'A place where you live'},
+  {word: 'java', hint: 'A name of programming language'},
+  {word: 'iphone', hint: "A popular phone's brand"},
+  {word: 'earth', hint: 'the star that we live'},
   {word: 'salmon', hint: 'Name of a fish'},
   {word: 'plane', hint: 'A vehicla that can fly'},
   {word: 'thailand', hint: 'Siam, Land of smile'},
-  {word: 'guitar', hint: 'An instrument'}
+  {word: 'guitar', hint: 'An instrument'},
+  {word: 'hangman', hint: 'Game we are playing'}
 ]
 
 //คำที่สุ่มมา
@@ -47,8 +48,6 @@ const clickLetter = (letter) => {
     if(!arrayOfWord.value.includes(letter)){
       lives.value--
     }
-    animate()
-    canvas()
   }
 }
 
@@ -70,6 +69,21 @@ const checkCorrect = computed(() => {
     return arrayOfWord.value.every(letter => chosenChar.value.includes(letter))
 })
 
+const images = [
+  '../public/hangmans/hangman-0.png',
+  '../public/hangmans/hangman-1.png',
+  '../public/hangmans/hangman-2.png',
+  '../public/hangmans/hangman-3.png',
+  '../public/hangmans/hangman-4.png',
+  '../public/hangmans/hangman-5.png',
+  '../public/hangmans/hangman-6.png',
+  '../public/hangmans/hangman-7.png',
+  '../public/hangmans/hangman-8.png',
+  '../public/hangmans/hangman-9.png',
+  '../public/hangmans/hangman-10.png',
+]
+
+
 //To do list!=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=
 //เฉลยตอนแพ้ //
 //ทำ you win //
@@ -80,62 +94,6 @@ const checkCorrect = computed(() => {
 //เพิ่ม word แบบไม่มีเว้นวรรค*
 //------------------
 
-var animate = function () {
-    var drawMe = lives
-    drawArray[drawMe]()
-}
-
-const canvas = ()=> {
-    myStickman = document.getElementById("stickman")
-
-    context = myStickman.getContext('2d')
-    context.beginPath()
-    context.strokeStyle = "#fff"
-    context.lineWidth = 2
-
-}
-
-head = function(){
-    myStickman = document.getElementById("stickman")
-
-    context = myStickman.getContext('2d')
-    context.beginPath()
-    context.arc(60, 25, 10, 0, Math.PI*2, true)
-    context.storke()
-}
-draw = function($pathFromx, $pathFromy, $pathTox, $pathToy){
-    context.moveTo($pathFromx, $pathFromy)
-    context.lineTo($pathTox, $pathToy)
-    context.storke()
-}
-frame1 = function(){
-    draw (0, 150, 150, 150)
-}
-frame2 = function(){
-    draw (10, 0, 10, 600)
-}
-frame3 = function(){
-    draw (0, 5, 70, 5)
-}
-frame4 = function(){
-    draw (60, 5, 60, 15)
-}
-torso = function(){
-    draw (60, 36, 60, 70)
-}
-rightArm = function(){
-    draw (60, 46, 100, 50)
-}
-leftArm = function(){
-    draw (60, 46, 20, 50)
-}
-rightLeg = function(){
-    draw (60, 70, 100, 100)
-}
-leftLeg = function(){
-    draw (60, 70, 20, 100)
-}
-drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, frame2, frame1]
 </script>
 
 
@@ -144,9 +102,8 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, 
 
 <template>
   <h1>Hangman Game</h1>
-   <!-- <canvas id="stickman">This Text will show if the Browser does NOT support HTML5 Canvas tag</canvas> -->
     
-    <!-- แทบ You have Lives -->
+    <!-- แถบ You have Lives -->
     <div>
       <p v-if="lives!==0">You have {{ lives }} lives</p>
       <h3 v-else>Game Over!! <br> The answer is {{ randomWords.word }}</h3>
@@ -155,7 +112,7 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, 
 
     <br>
 
-    <!-- แทบคำที่ random มา -->
+    <!-- แถบคำที่ random มา -->
       <div>
         <span v-for="(letter,index) in arrayOfWord" :key="index" class="block">
           <span v-if="chosenChar.includes(letter)==true">{{ letter }}</span>
@@ -164,7 +121,8 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, 
       </div>
       
    <br>
-   <br>
+   
+    <img :src="images[lives]" width="250">
     
   <!-- แป้นพิมตัวอักษรทั้งหมด -->
   <div class="col-4">
@@ -177,11 +135,12 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, 
   
 <!-- แถบปุ่ม hint + play -->
   <div class="action-button">
-    <button @click="showHint" v-show="lives <= 5">Hint</button>
-    <br>
-    <div v-show="hintStatus">{{ hint }}</div>
-    <br>
-    <button @click="playAgain">Play Again</button>
+    <button @click="showHint" v-show="lives <= 5" :disabled="hintStatus">Hint</button>
+    <span v-show="hintStatus" class="hint">{{ hint }}</span>
+
+    <span class="playAgain">
+    <button @click="playAgain"  >Play Again</button>
+    </span>
   </div>
 
 </template>
@@ -201,17 +160,38 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, 
     background-color: lightpink;
     text-align: center;
     /* font-family: "fc-pallete-color"; */
+    line-height: 30px;
   }
   button {
+    font-family: 'Press Start 2P', cursive;
     border-radius: 10px;
     padding: 10px;
     margin: 4px;
+    border: 3px #000;
+  }
+  button:hover:not([disabled]) {
+	background-color: lightcoral;
+  color: white;
+	transition-duration: .5s;
+  }
+  button:active:not([disabled]){
+    background-color: white;
+    transition-duration:2s;
+  }
+  .hint {
+    padding: 20px 0px 0px 20px;
+  }
+  .playAgain {
+    margin: 2em;
+    position: fixed;
+    top: 0;
+    right: 0;
   }
   .letter-button{
     padding: 16px;
     height: 60px;
     width: 60px;
-    font-size: 20px
+    font-size: 20px;
   }
   .action-button {
   padding: 16px;
@@ -225,23 +205,20 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm, torso, head ,frame4, frame3, 
     color: blueviolet;
   } */
   .block {
-    padding: 10px;
-    margin : 10px;
-    width: 30px;
-    height: 30px;
+    padding: 12px;
+    margin : 8px;
+    width: 52px;
+    height: 52px;
     border: 3px solid;
-    border-radius: 10px;
-    border-color: lightcoral;
+    border-radius: 15px;
+    border: lightcoral solid thick;
     color: black;
     text-align: center;
+    font-size: 24px;
   }
 
 
-  canvas{
-  color: $white;
-  border: #fff dashed 2px;
-  padding:15px;
-}
+  
 </style>
 
 
