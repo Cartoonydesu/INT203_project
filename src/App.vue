@@ -179,13 +179,14 @@ const images = [
     transition-duration:2s;
   }
   .hint {
-    padding: 20px 0px 0px 20px;
+    padding: 30px;
   }
   .playAgain {
     margin: 2em;
     position: fixed;
     top: 0;
     right: 0;
+    padding: 30px;
   }
   .letter-button{
     padding: 16px;
