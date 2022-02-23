@@ -51,7 +51,6 @@ const clickLetter = (letter) => {
   }
 }
 
-
 //function ที่กดแล้วจะ show hint
 const hintStatus = ref(false)
 const showHint = () => {
@@ -83,22 +82,7 @@ const images = [
   '../public/hangmans/hangman-10.png',
 ]
 
-
-//To do list!=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=
-//เฉลยตอนแพ้ //
-//ทำ you win //
-//ภาพ hang man
-//UX UI
-//live เหลือ 5 ค่อยให้ hint //
-//(ต่อยอด)กดแป้มพิมได้
-//เพิ่ม word แบบไม่มีเว้นวรรค*
-//------------------
-
 </script>
-
-
-
-
 
 <template>
   <h1>Hangman Game</h1>
@@ -218,8 +202,4 @@ const images = [
     font-size: 24px;
   }
 
-
-  
 </style>
-
-
