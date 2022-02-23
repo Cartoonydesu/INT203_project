@@ -131,19 +131,13 @@ const images = [
 
 
 <style>
-
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-  /* @font-face {
-    font-family: "fc-pallete-color";
-    src:(../assets/fonts/FC-Pallete-Color.ttf), format("truetype");
-  } */
   body {
     font-family: 'Press Start 2P', cursive;
     padding: 2em;
     margin: 2em;
     background-color: lightpink;
     text-align: center;
-    /* font-family: "fc-pallete-color"; */
     line-height: 30px;
   }
   button {
@@ -181,14 +175,10 @@ const images = [
   .action-button {
   padding: 16px;
   margin : 6px;
-  /* display: flex; */
   text-align: left;
   height: 60px;
   gap: 5px;
   }
-  /* .letter { 
-    color: blueviolet;
-  } */
   .block {
     padding: 12px;
     margin : 8px;
