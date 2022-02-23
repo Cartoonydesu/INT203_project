@@ -85,6 +85,9 @@ const images = [
 </script>
 
 <template>
+  <!-- <meta charset="utf-8">
+  <meta name="viewpoint" content="width=widthdevice, intial-scal=1.0"> -->
+  
   <h1>Hangman Game</h1>
     
     <!-- แถบ You have Lives -->
