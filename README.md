@@ -22,6 +22,6 @@ Hangman แต่เดิมเป็นเกมคลาสสิกที่
 3. 63130500087 พิรญาณ์  สุทธิปริญญานนท์
 4. 63130500106 วิชชุตา   พิภพภิญโญ
 
-### Ref. 
+### References
 - https://code-boxx.com/simple-hangman-game-javascript/
 - https://codepen.io/cathydutton/pen/JjpxMm
